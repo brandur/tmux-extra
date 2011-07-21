@@ -46,8 +46,6 @@ else
         # Create a new session (without attaching it) and link to base session 
         # to share windows
         tmux new-session -d -t $base_session -s $session_id
-        # Create a new window in that session
-        #tmux new-window
         # Attach to the new session
         tmux attach-session -t $session_id
         # When we detach from it, kill the session
