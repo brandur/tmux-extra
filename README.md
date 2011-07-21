@@ -17,3 +17,7 @@ Usage
 
 Launch Tmux via the launcher with `tmx <session name>` where the session name is an arbitrary string representing a session that you might want to reconnect to later (e.g. `tmx mutelight`).
 
+Contact
+-------
+
+Send comments and suggestions to **brandur@mutelight.org**.
