@@ -27,7 +27,7 @@ fi
 
 base_session="$1"
 # This actually works without the trim() on all systems except OSX
-tmux_nb=$(trim `tmux ls | grep "^$base_session" | wc -l`)
+tmux_nb=$(trim `tmux ls | grep -c "^$base_session"`)
 if [[ "$tmux_nb" == "0" ]]; then
     echo "Launching tmux base session $base_session ..."
     tmux new-session -s $base_session
