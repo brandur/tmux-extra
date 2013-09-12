@@ -10,6 +10,13 @@
 #     http://forums.gentoo.org/viewtopic-t-836006-start-0.html
 #
 
+#If we're running inside iTerm, integrate with its tmux support
+if [ x"$TERM_PROGRAM" = x"iTerm.app" ]; then
+  TMUX_CMD="tmux -CC"
+else
+  TMUX_CMD="tmux"
+fi
+
 # Works because bash automatically trims by assigning to variables and by 
 # passing arguments
 trim() { echo $1; }
@@ -30,7 +37,7 @@ base_session="$1"
 tmux_nb=$(trim `tmux ls | grep "^$base_session" | wc -l`)
 if [[ "$tmux_nb" == "0" ]]; then
     echo "Launching tmux base session $base_session ..."
-    tmux new-session -s $base_session
+    $TMUX_CMD new-session -s $base_session
 else
     # Make sure we are not already in a tmux session
     if [[ -z "$TMUX" ]]; then
@@ -47,9 +54,9 @@ else
         # to share windows
         tmux new-session -d -t $base_session -s $session_id
         # Attach to the new session
-        tmux attach-session -t $session_id
+        $TMUX_CMD attach-session -t $session_id
         # When we detach from it, kill the session
-        tmux kill-session -t $session_id
+        $TMUX_CMD kill-session -t $session_id
     fi
 fi 
 
